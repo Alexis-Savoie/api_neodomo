@@ -1,15 +1,17 @@
 // set NODE_ENV=production
 
-const express = require("express") // Chargement Express
+const express = require("express") 
 const bodyParser = require("body-parser")
+
 const app = express() // Instance Express
 
-const port = process.env.PORT || 8020 // Port ecoute du server
+const port = 8020 // Port ecoute du server
 
-/*
-const route = require("./src/routes/indexRoute")
+//import { routes } from "./routes/indexRoute.ts"
+const routes = require("./routes/indexRoute.ts");
 
-const middleware = require("./src/routes/otherRoutes/middleware")
+
+//import middleware from "./src/routes/otherRoutes/middleware"
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -18,18 +20,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // Middelware
-app.use("/", middleware.middleware)
-app.use(route)
-*/
+//app.use("/", middleware.middleware)
 
-//#region test route
-app.get('/test', (req, res) => {
 
-    console.log("Test worked yay !!")
-    res.setHeader("Content-Type", "application/json"); // Typage de la data de retour
-    res.status(200).json({message: "bonjour API_NEODOMO"});
-})
-//#endregion
+app.use(routes)
+
 
 // Run serve
 app.listen(port, () => console.log(`listening on http://localhost:${port}`))
